@@ -1,0 +1,10 @@
+name: pipeline-static
+kind: HTTPPipeline
+
+# Built-in labels are `END` which can't be used by filters.
+flow:
+  - filter: file-server
+filters:
+  - name: file-server
+    kind: FileServer
+    root: /Users/sean/go/1.18.6/src/github.com/FucAttaCk/gateway/static

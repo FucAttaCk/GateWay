@@ -1,0 +1,15 @@
+name: pipeline-api
+kind: HTTPPipeline
+
+# Built-in labels are `END` which can't be used by filters.
+flow:
+  - filter: proxy
+    jumpIf: { fallback: END }
+filters:
+  - name: proxy
+    kind: Proxy
+    mainPool:
+      servers:
+        - url: http://127.0.0.1:2381
+      loadBalance:
+        policy: roundRobin
