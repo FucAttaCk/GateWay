@@ -3,8 +3,12 @@ kind: HTTPServer
 port: 10080
 https: false
 rules:
-  - paths:
-      - pathPrefix: /apis
-        backend: pipeline-api
-      - pathPrefix: /
-        backend: pipeline-static
+- paths:
+  - pathPrefix: /apis
+    backend: pipeline-api
+  - pathRegexp: .\.(png|ico|gif|jpg|jpeg|css|js)$
+    backend: pipeline-static
+  - pathRegexp: ^/(.*)$
+    rewriteTarget: /index.html
+    backend: pipeline-static
+
